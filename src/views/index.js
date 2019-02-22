@@ -11,3 +11,9 @@ export {
   default as UsmConfiggoods
 }
 from './Configgoods'
+
+
+export {
+  default as UsmGoodsForm
+}
+from './GoodsForm'

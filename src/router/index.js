@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import {
   UsmIndex,
   UsmLogin,
-  UsmConfiggoods
+  UsmConfiggoods,
+  UsmGoodsForm
 } from '../views'
 
 Vue.use(Router)
@@ -24,6 +25,12 @@ export default new Router({
       path: '/configGoods',
       name: 'usmConfigGoods',
       component: UsmConfiggoods
+    }
+    ,
+    {
+      path: '/goodsForm',
+      name: 'usmGoodsForm',
+      component: UsmGoodsForm
     }
   ]
 })

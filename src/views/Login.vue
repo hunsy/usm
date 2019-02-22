@@ -62,18 +62,12 @@ export default {
     };
   },
   methods: {
-    async doLogin() {
+    doLogin() {
       console.log("userinfo", this.userinfo);
-
-      const data = await login(this.userinfo).catch(e => {
-        console.log(e);
-      });
-      console.log("data", data);
-
-      if (data) {
-        setToken(data["token"]);
+      this.$store.dispatch("Login", this.userinfo).then(ret => {
+        console.log("data-->", ret);
         this.$router.push("/");
-      }
+      });
     }
   }
 };

@@ -4,20 +4,20 @@
       <div class="weui-tab">
         <div class="weui-tab__panel">
           <index-head :title="title"/>
-          <div v-if="currentIndex == 0">熬上撒大所大所多0000</div>
-          <div v-if="currentIndex == 1">
+          <div v-if="currentTab == 0">熬上撒大所大所多0000</div>
+          <div v-if="currentTab == 1">
             <my-product/>
           </div>
-          <div v-if="currentIndex == 2">
+          <div v-if="currentTab == 2">
             <my-goods/>
           </div>
-          <div v-if="currentIndex == 3">熬上撒大所大所多333333</div>
+          <div v-if="currentTab == 3">熬上撒大所大所多333333</div>
         </div>
         <div class="weui-tabbar">
           <a
             @click="changeIdx(0)"
             class="weui-tabbar__item"
-            :class=" {'weui-bar__item_on':currentIndex == 0} "
+            :class=" {'weui-bar__item_on':currentTab == 0} "
           >
             <span style="display: inline-block;position: relative;">
               <img src="@/assets//icon_tabbar.png" alt class="weui-tabbar__icon">
@@ -29,7 +29,7 @@
           <a
             @click="changeIdx(1)"
             class="weui-tabbar__item"
-            :class=" {'weui-bar__item_on':currentIndex == 1} "
+            :class=" {'weui-bar__item_on':currentTab == 1} "
           >
             <img src="@/assets//icon_tabbar.png" alt class="weui-tabbar__icon">
             <p class="weui-tabbar__label">我的设备</p>
@@ -38,7 +38,7 @@
           <a
             @click="changeIdx(2)"
             class="weui-tabbar__item"
-            :class=" {'weui-bar__item_on':currentIndex == 2} "
+            :class=" {'weui-bar__item_on':currentTab == 2} "
           >
             <span style="display: inline-block;position: relative;">
               <img src="@/assets//icon_tabbar.png" alt class="weui-tabbar__icon">
@@ -55,7 +55,7 @@
               src="@/assets/icon_tabbar.png"
               alt
               class="weui-tabbar__icon"
-              :class=" {'weui-bar__item_on':currentIndex == 3} "
+              :class=" {'weui-bar__item_on':currentTab == 3} "
             >
             <p class="weui-tabbar__label">我</p>
           </a>
@@ -69,6 +69,7 @@
 import IndexHead from "@/components/IndexHead";
 import MyProduct from "./MyProduct";
 import MyGoods from "./MyGoods";
+import { mapGetters } from "vuex";
 export default {
   name: "usmIndex",
   components: {
@@ -79,19 +80,24 @@ export default {
   data() {
     return {
       title: "首页",
-      currentIndex: 0,
       tabItem: "weui-tabbar__item",
       tabItemOn: "weui-bar__item_on"
     };
   },
   computed: {
+    ...mapGetters(["token", "name", "currentTab"]),
     isCurrentIndex: function(i) {
       return this.currentIndex == i;
     }
   },
+  mounted() {
+    console.log(this.name);
+    console.log(this.currentTab);
+  },
   methods: {
     changeIdx(i) {
-      this.currentIndex = i;
+      this.$store.dispatch("ChangeTab", i);
+
       if (i == 0) {
         this.title = "首页";
       }

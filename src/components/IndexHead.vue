@@ -35,25 +35,5 @@ export default {
   height: 60px;
   background-color: #99ccff;
 }
-.weui-flex {
-  height: 100%;
-  padding: 0px;
-  margin: 0px;
-}
-.weui-flex__item {
-  line-height: 60px;
-}
-.back {
-  text-align: left;
-  padding-left: 16px;
-  color: gray;
-  font-size: 16px;
-}
 
-.title {
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-}
 </style>

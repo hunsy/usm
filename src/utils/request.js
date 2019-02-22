@@ -3,6 +3,7 @@ import {
   getToken,
   clearToken
 } from './auth'
+import store from '@/store';
 import router from '../router'
 
 if (process.env.NODE_ENV == 'development') {
@@ -18,7 +19,12 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 // Add a request interceptor
 axios.interceptors.request.use(config => {
   // Do something before request is sent
-  const token = getToken();
+  let token = store.getters.token;
+  if (!token) {
+    token = getToken();
+  }
+  console.log("req token:", token);
+
   config.headers['Authorization'] = `Token ${token}`
   return config;
 }, (error) => {
@@ -39,7 +45,9 @@ axios.interceptors.response.use(resp => {
     } else {
       //鉴权失败
       if (dataCode == 403) {
-        clearToken()
+        console.log("403", '----------------------');
+
+        store.dispatch('Logout');
         router.push('/login')
       } else {
         return Promise.reject(data.data);
